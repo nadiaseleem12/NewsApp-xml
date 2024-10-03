@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.example.news.ui.home.articleDetails.ArticleDetailsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pattern_bg"
+        tools:context=".ui.home.articleDetails.ArticleDetailsFragment">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.uiMessage.component1()?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/article_img"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:url="@{vm.article.component3()}"
+            app:placeholder="@{@drawable/loading_spinner}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/article_img"
+            android:text="@{vm.article.component1()}" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/article_title">
+
+            <TextView
+                android:id="@+id/article_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_light"
+                android:lines="5"
+                android:maxLines="10"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:textSize="16sp"
+                android:text="@{vm.article.component2()}" />
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/article_readMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_thin"
+            android:gravity="end"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
+            android:foregroundGravity="center"
+            android:textColor="@android:color/darker_gray"
+            app:drawableTint="@android:color/darker_gray"
+            app:drawableTintMode="src_in"
+            tools:text="@string/view_full_article"
+            android:textSize="18sp"
+            app:drawableEndCompat="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toBottomOf="@id/nested_scroll_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
